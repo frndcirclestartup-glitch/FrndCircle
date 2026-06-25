@@ -230,6 +230,8 @@ export function ActivityDetailClient({
           }`}
           style={{ transform: `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.15}px)` }}
         />
+        {/* Purple overlay to match design theme */}
+        <div className="absolute inset-0 bg-primary/25 mix-blend-color pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 
@@ -514,7 +516,7 @@ export function ActivityDetailClient({
               {relatedActivities.map((related, index) => (
                 <AnimateIn key={related.slug} delay={index * 100}>
                   <Link
-                    href={`/activity/${related.slug}`}
+                    href="/#waitlist"
                     className="group relative rounded-3xl overflow-hidden aspect-[4/5] block"
                   >
                     <img
@@ -522,7 +524,9 @@ export function ActivityDetailClient({
                       alt={related.alt}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    {/* Purple theme tint overlay */}
+                    <div className="absolute inset-0 bg-primary/20 mix-blend-color pointer-events-none transition-opacity duration-300 group-hover:bg-primary/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
                       <div>
                         <h3 className="text-xl font-medium text-white">{related.title}</h3>

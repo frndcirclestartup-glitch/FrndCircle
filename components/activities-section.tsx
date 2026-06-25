@@ -1,10 +1,26 @@
-import Link from "next/link"
+"use client"
+
+import { usePathname } from "next/navigation"
 import { ArrowUpRight } from "lucide-react"
 import { ScrollReveal } from "./scroll-reveal"
 import { SectionLabel } from "./section-label"
 import { activities } from "@/lib/activities-data"
 
 export function ActivitiesSection() {
+  const pathname = usePathname()
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    if (pathname === "/") {
+      e.preventDefault()
+      const element = document.getElementById(targetId)
+      if (element) {
+        const headerOffset = 100
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" })
+      }
+    }
+  }
+
   return (
     <section id="activities" className="py-24 px-6 bg-secondary/50">
       <div className="max-w-6xl mx-auto">
@@ -23,13 +39,19 @@ export function ActivitiesSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {activities.map((activity, index) => (
             <ScrollReveal key={activity.slug} delay={(index % 3) * 100}>
-              <Link href={`/activity/${activity.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[4/5] block">
+              <a
+                href={pathname === "/" ? "#waitlist" : "/#waitlist"}
+                onClick={(e) => handleSmoothScroll(e, "waitlist")}
+                className="group relative rounded-3xl overflow-hidden aspect-[4/5] block cursor-pointer"
+              >
                 <img
                   src={activity.image || "/placeholder.svg"}
                   alt={activity.alt}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                {/* Purple theme tint overlay */}
+                <div className="absolute inset-0 bg-primary/20 mix-blend-color pointer-events-none transition-opacity duration-300 group-hover:bg-primary/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
                   <div>
                     <h3 className="text-xl font-medium text-white">{activity.title}</h3>
@@ -39,7 +61,7 @@ export function ActivitiesSection() {
                     <ArrowUpRight className="w-4 h-4 text-white" aria-hidden="true" />
                   </span>
                 </div>
-              </Link>
+              </a>
             </ScrollReveal>
           ))}
         </div>
