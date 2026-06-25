@@ -1,0 +1,267 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Added smooth scroll behavior globally */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Jamly Nightlife Dark Design System
+     bg #18121C · surface #4D3252 · accent #E1AEED · secondary #8F6C95 · support #292E49 */
+  --background: oklch(0.165 0.018 318);
+  --foreground: oklch(0.97 0.008 320);
+  --card: oklch(0.215 0.028 320);
+  --card-foreground: oklch(0.97 0.008 320);
+  --popover: oklch(0.215 0.028 320);
+  --popover-foreground: oklch(0.97 0.008 320);
+  --primary: oklch(0.82 0.085 322);
+  --primary-foreground: oklch(0.18 0.028 320);
+  --secondary: oklch(0.345 0.045 330);
+  --secondary-foreground: oklch(0.97 0.008 320);
+  --tertiary: oklch(0.305 0.05 282);
+  --tertiary-foreground: oklch(0.97 0.008 320);
+  --muted: oklch(0.30 0.03 320);
+  --muted-foreground: oklch(0.74 0.035 320);
+  --accent: oklch(0.555 0.055 328);
+  --accent-foreground: oklch(0.97 0.008 320);
+  --destructive: oklch(0.60 0.21 18);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.32 0.03 322);
+  --input: oklch(0.28 0.03 322);
+  --ring: oklch(0.82 0.085 322);
+  --outline: oklch(0.55 0.04 322);
+  --chart-1: oklch(0.82 0.085 322);
+  --chart-2: oklch(0.555 0.055 328);
+  --chart-3: oklch(0.305 0.05 282);
+  --chart-4: oklch(0.65 0.10 318);
+  --chart-5: oklch(0.45 0.06 300);
+  --radius: 0.875rem;
+  --sidebar: oklch(0.215 0.028 320);
+  --sidebar-foreground: oklch(0.97 0.008 320);
+  --sidebar-primary: oklch(0.82 0.085 322);
+  --sidebar-primary-foreground: oklch(0.18 0.028 320);
+  --sidebar-accent: oklch(0.30 0.03 320);
+  --sidebar-accent-foreground: oklch(0.97 0.008 320);
+  --sidebar-border: oklch(0.32 0.03 322);
+  --sidebar-ring: oklch(0.82 0.085 322);
+}
+
+@theme inline {
+  /* Social Luxury Light: Poppins for all typography */
+  --font-sans: "Poppins", "Poppins Fallback", system-ui, sans-serif;
+  --font-serif: "Poppins", "Poppins Fallback", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --color-sidebar: var(--card);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ---- Premium motion ---- */
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 8s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Edge fade mask for marquees */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Premium film grain for tactile depth */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Eyebrow pulse dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Hand-drawn underline draw-in */
+@keyframes draw-underline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.draw-underline path {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: draw-underline 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+}
+
+/* Scroll-driven reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-glow-pulse,
+  .animate-marquee,
+  .animate-pulse-dot {
+    animation: none;
+  }
+  .draw-underline path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
